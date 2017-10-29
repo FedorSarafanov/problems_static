@@ -1,0 +1,99 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodov{3.228}{Магнитостатика}
+
+\usetikzlibrary{decorations.markings}
+\usepackage[outline]{contour}
+\contourlength{4pt}
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+    % \begin{scope}[yshift=2cm]
+    %     \lineann[2]{0}{-2}{$a$}
+    % \end{scope}
+
+    \begin{scope}[
+        very thick,decoration={
+        markings,
+        mark=at position 0.5 with {\arrow{>}}}
+        ] 
+        % \draw[] (0,0) arc (90:1);
+        \draw[thick] (0,0) pic[->]{carc=0:180:4cm};
+
+        \draw (0,0) coordinate (0) circle (2pt) node[below, yshift=-1em]{P};
+
+        \draw[->] (0) -- ++(90:4cm) coordinate (b) node [pos=0.5] {\contour{white}{$\vec{r}$}};
+
+        \draw[->] (0) -- ++(45:4cm) node [pos=0.7] {\contour{white}{$\vec{r}_1$}};
+
+        \draw[->] (0) -- ++(135:4cm) node [pos=0.7] {\contour{white}{$\vec{r}_2$}};
+
+        \draw[->, very thick] (0) -- ++(-135:1.5cm) node [below] {\contour{white}{$d\vec{B}_2$}};        
+
+        \draw[->, very thick] (0) -- ++(135:1.5cm) node [pos=0.5] {\contour{white}{$d\vec{B}_1$}};    
+
+
+        \draw[axis,->] (0,0) -- (-5,0) node[left] {$+x$};
+        % \draw[->] (b) -- ++(180:1.5cm) node [pos=0.5] {\contour{white}{$d\vec{l}$}};
+        % \draw[postaction={decorate}] (0,4) coordinate (2)-- node[above] {2}(8,4);
+        % \draw[postaction={decorate}] (8,4) coordinate (3)-- node[right] {3}(8,0);
+        % \draw[postaction={decorate}] (8,0) coordinate (4)-- node[below] {4}(0,0);
+
+        % \draw[dashed] (1) -- (3);
+        % \draw[dashed] (2) -- (4);
+        % % \draw[dashed] 
+        % %     (-4,4) node[above] {$O$}
+        % %     -- (0,0) node[anchor=west] {$A$}
+        % %     -- (4,-4) node[right] {$O'$};
+
+        % % \draw[dashed] 
+        % %     (4,4) node[above] {$B$}
+        % %     -- (-4,-4) node[right] {$B'$};            
+
+        % % \draw (135:{sqrt(2)}) node [] {\contour{white}{$\bigotimes$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        % \draw (4,2) node [] {\contour{white}{$\bigotimes$}} node[above, yshift=0.5em] {$d\vec{B}_{1,2,3,4}$};
+
+        % % \draw (45:{sqrt(2)}) node [] {\contour{white}{$\bigodot$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        % \draw (0,0) node [] {\contour{white}{$\bigotimes$}} node[right, xshift=0.5em] {$d\vec{B}_2$};     
+
+        \draw (60:4) node [] {\contour{white}{$\bigotimes$}}  node[above, yshift=0.5em] {$\vec{j}$};
+        % % \draw (135+90:2.5) node [] {\contour{white}{$\bigodot$}} node[above, yshift=0.5em] {$d\vec{B}_2$};
+
+        % % \draw (45-90:{sqrt(2)}) node [] {\contour{white}{$\bigodot$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        % % \draw (45-90:2.5) node [] {\contour{white}{$\bigodot$}} node[above, yshift=0.5em] {$d\vec{B}_2$};   
+
+        % % \draw (5,0) -- (14,0);          
+        % % \draw[] (9,-4) -- ++(0,8);          
+
+    \end{scope}    
+    \end{tikzpicture}
+\end{figure}
+Разобьем такой проводник на более простые - линейные проводники. 
+
+Введем плотность тока $\rho=\frac{I}{\pi R}$. Тогда для каждого такого проводника
+
+\begin{equation}
+    dB=2\frac{\beta dI}{R}=2\frac{\beta \rho dl}{R}=2\beta \rho d\phi
+\end{equation}
+
+\begin{equation}
+    dB_x=2\frac{\beta dI}{R}=2\frac{\beta \rho dl}{R}=2\beta \rho  \sin \phi d\phi
+\end{equation}
+
+Из соображений симметрии вертикальная компонента поля занулится, а горизонтальную (на оси $+x$) найдем интегрированием по всем элементам разбиения - линейным проводникам:
+
+\begin{equation}
+    B=\int\limits_0^{\pi}2\beta \rho \sin \phi d\phi= 4\beta \rho=\frac{4\beta I}{\pi R}=28\text{ мкТл}
+\end{equation}
+
+\end{document}

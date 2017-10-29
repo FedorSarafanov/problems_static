@@ -1,0 +1,137 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodovE{3.12}
+
+\begin{document}
+
+\begin{tikzpict}
+	\draw (0,0) circle (1cm);
+	\draw (-4,0) circle (0cm);
+	\draw[axis,->] (0,0) -- ++(0,1.5) node[above] {$+y$};
+	\draw[axis,->] (0,0) -- ++(1.5,0) node[right] {$+x$};
+
+	\draw[axis] (0,0) -- ++ (45:1) coordinate (X);
+
+	\draw[force,->] (0,0) -- ++ (135+90:0.4) node[below] {$d\vec{E}$};
+	\draw[fill=magenta] (X) circle (2pt) node [right, xshift=0.5em] %
+		{$dq(\phi)=dl\cdot \lambda_0 \cos\phi$};
+	\draw[fill=magenta] (0,0) circle (2pt);% node [left]		{$P$};
+\end{tikzpict}
+Рассмотрим напряженность в центре кольца.
+\begin{equation}
+	d\vec{E}=
+		dE_x\cdot \vec{i}+
+		dE_y\cdot \vec{j}\\	
+\end{equation}
+Напряженность элементарного (точечного) заряда $dq$
+\begin{equation}
+	dE=\frac{k\cdot dq(\phi)}{R^2}
+\end{equation}
+Запишем дифференциал напряженности в проекциях:
+\begin{gather}
+	dE_x=\frac{k\cdot dq(\phi)}{R^2}\cos\phi\\
+	dE_y=\frac{k\cdot dq(\phi)}{R^2}\sin\phi
+\end{gather}
+Для перевода интегрирования в сферические координаты, выразим диффиренциал дуги через дифференциал азимутального угла:
+\begin{equation}
+	\phi=\frac{l}{R}
+	\quad\Rightarrow\quad	
+	dl=R\cdot d\phi
+\end{equation}
+\begin{gather}
+	E_x=\frac{k\lambda_0}{R^2}\int\limits_{0}^{L}   	\cos^2\phi \cdot dl=
+		\frac{k\lambda_0}{R^2}\int\limits_{0}^{2\pi}   	\cos^2\phi \cdot R\cdot d\phi=\frac{k\lambda_0\pi}{R}\\
+	E_y=\frac{k\lambda_0}{R^2}\int\limits_{0}^{L}   	\cos\phi\sin\phi \cdot dl=
+		\frac{k\lambda_0}{R^2}\int\limits_{0}^{2\pi}   	\cos\phi\sin\phi \cdot R\cdot d\phi=0\\		
+	E_y=\frac{k\lambda_0}{R^2}R\int\limits_{0}^{2\pi}   	\cos\phi\sin\phi \cdot d\phi=0
+\end{gather}
+Тогда полная напряженность в центре кольца
+\begin{equation}
+	E=k\frac{\pi\lambda_0}{R}
+\end{equation}
+\newpage
+\begin{tikzpict}
+	\draw (0,-1) -- (0,1);
+	\draw (-4,0) circle (0cm);
+	\draw[axis,->] (0,0) -- ++(0,1.5) node[above] {$+y$};
+	\draw[axis,->] (0,0) -- ++(4,0) node[right] {$+z$};
+
+	\draw[] (0,0) -- ++ (90:1) coordinate (X);
+
+	\draw[fill=magenta] (X) circle (2pt) node [right, xshift=0.5em, yshift=0.5em] %
+		{$dq(\phi)=dl\cdot \lambda_0 \cos\phi$};
+	\draw[fill=magenta] (3,0) coordinate (Y) circle (2pt);% node [left]		{$P$};
+	\draw[axis] (X) -- (Y);
+	\draw[force,->] (Y) -- ++ (1.5/2,-0.5/2) node[below] {$d\vec{E}$};
+\end{tikzpict}
+% Рассмотрим напряженность в центре кольца.
+	% dE_y=\frac{k\cdot dq(\phi)}{r^2}\sin\phi
+% \begin{equation}
+% 	d\vec{E}=
+% 		dE_x\cdot \vec{i}+
+% 		dE_y\cdot \vec{j}\\	
+% \end{equation}
+Напряженность элементарного (точечного) заряда $dq$
+\begin{equation}
+	dE=\frac{k\cdot dq(\phi)}{r^2}
+\end{equation}
+Запишем дифференциал напряженности в проекциях:
+\begin{gather}
+	dE_x=\frac{k\cdot dq(\phi)}{r^2}\cos\phi\sin\Theta\\
+	dE_y=\frac{k\cdot dq(\phi)}{r^2}\sin\phi\sin\Theta\\
+	dE_z=\frac{k\cdot dq(\phi)}{r^2}\cos\Theta
+\end{gather}
+Где
+\begin{equation}
+	\sin\Theta=\frac{R}{r}=\frac{R}{\sqrt{R^2+z^2}}\quad, \quad
+	\cos\Theta=\frac{z}{r}=\frac{z}{\sqrt{R^2+z^2}}
+\end{equation}
+Для перевода интегрирования в сферические координаты, выразим диффиренциал дуги через дифференциал азимутального угла:
+\begin{equation}
+	\phi=\frac{l}{R}
+	\quad\Rightarrow\quad	
+	dl=R\cdot d\phi
+\end{equation}
+\begin{gather}
+	E_x=\sin\Theta
+		\frac{k\lambda_0}{r^2}
+		\int\limits_{0}^{L}   	
+		\cos^2\phi \cdot dl=
+		\sin\Theta%
+		\frac{k\lambda_0}{r^2}
+		\int\limits_{0}^{2\pi}
+		\cos^2\phi \cdot R\cdot d\phi=
+		\frac{k\lambda_0\pi R^2}{r^3}\\
+	E_y=\sin\Theta
+		\frac{k\lambda_0}{r^2}
+		\int\limits_{0}^{L}   	
+		\cos\phi\sin\phi \cdot dl=
+		\sin\Theta%
+		\frac{k\lambda_0}{r^2}
+		\int\limits_{0}^{2\pi}   	
+		\cos\phi\sin\phi \cdot R\cdot d\phi=
+		0\\		
+	E_z=\cos\Theta
+		\frac{k\lambda_0}{R^2}
+		\int\limits_{0}^{L}   	
+		\cos\phi\cdot dl=
+		\cos\Theta%
+		\frac{k\lambda_0}{R^2}
+		\int\limits_{0}^{2\pi}   	
+		\cos\phi\cdot R\cdot d\phi=
+		0
+\end{gather}
+Тогда полная напряженность в точке наблюдения
+\begin{equation}
+	E=
+	k\frac{\pi\lambda_0R^2}{r^3}=
+	k\frac{\pi\lambda_0R^2}{(R^2+z^2)^{3/2}}
+\end{equation}
+При $z \gg R$
+\begin{equation}
+	E=
+	k\frac{\pi\lambda_0R^2}{(z^2)^{3/2}}=
+	k\frac{\pi\lambda_0R^2}{z^3}
+\end{equation}
+\end{document}

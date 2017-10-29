@@ -1,0 +1,109 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\yakovlev{304}{Магнитостатика}
+% Стыдить лжеца, шутить над дураком
+% И спорить с женщиной — всё то же,
+% Что черпать воду решетом:
+% От сих троих избавь нас, боже!..
+
+% М. Ю. Лермонтов.
+\usetikzlibrary{decorations.markings}
+\usepackage[outline]{contour}
+\contourlength{4pt}
+\begin{document}
+
+\begin{figure}[H]
+    % \centering
+    \begin{tikzpicture}
+    \begin{scope}[yshift=2cm]
+        \lineann[2]{0}{-2}{$a$}
+    \end{scope}
+
+    \begin{scope}[
+        very thick,decoration={
+        markings,
+        mark=at position 0.5 with {\arrow{>}}}
+        ] 
+        \draw[postaction={decorate}] (0,4)--(0,0);
+        \draw[axis,->] (0,3)--(0,4) node[above] {$+y$};
+        \draw[axis,->] (-3,0)--(-4,0) node[left] {$+x$};
+        \draw[axis,->] (0,0,-7)--(0,0,-8) node[below, xshift=1em] {$+z$};
+        \draw[postaction={decorate}] (0,0)--(-4,0);
+        \draw[dashed] 
+            (-4,4) node[above] {$O$}
+            -- (0,0) node[anchor=west] {$A$}
+            -- (4,-4) node[right] {$O'$};
+
+        \draw[dashed] 
+            (4,4) node[above] {$B$}
+            -- (-4,-4) node[right] {$B'$};            
+
+        \draw (135:{sqrt(2)}) node [] {\contour{white}{$\bigotimes$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        \draw (135:2.5) node [] {\contour{white}{$\bigotimes$}} node[above, yshift=0.5em] {$d\vec{B}_2$};
+
+        % \draw (45:{sqrt(2)}) node [] {\contour{white}{$\bigodot$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        % \draw (45:2.5) node [] {\contour{white}{$\bigotimes$}} node[above, yshift=0.5em] {$d\vec{B}_2$};     
+
+        % \draw (135+90:{sqrt(2)}) node [] {\contour{white}{$\bigotimes$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        % \draw (135+90:2.5) node [] {\contour{white}{$\bigodot$}} node[above, yshift=0.5em] {$d\vec{B}_2$};
+
+        \draw (45-90:{sqrt(2)}) node [] {\contour{white}{$\bigodot$}}  node[above, yshift=0.5em] {$d\vec{B}_1$};
+        \draw (45-90:2.5) node [] {\contour{white}{$\bigodot$}} node[above, yshift=0.5em] {$d\vec{B}_2$};   
+
+        \draw (5,0) -- (14,0);          
+        \draw[] (9,-4) -- ++(0,8);    
+
+        \begin{scope}[xshift=8cm]
+        \draw[scale=2,domain=0.031:1.22,smooth,variable=\x,blue] plot ({\x},{sqrt(0.2-0.6*(\x^0.9-0.62)^2)});
+        \draw[scale=2,domain=0.031:1.22,smooth,variable=\x,blue] plot ({\x},{-sqrt(0.2-0.6*(\x^0.9-0.62)^2)});    
+        \end{scope}
+        \begin{scope}[xshift=7.5cm]
+        \draw[scale=4,domain=0.031:1.22,smooth,variable=\x,blue] plot ({\x},{sqrt(0.2-0.6*(\x^0.9-0.62)^2)});
+        \draw[scale=4,domain=0.031:1.22,smooth,variable=\x,blue] plot ({\x},{-sqrt(0.2-0.6*(\x^0.9-0.62)^2)});    
+        \end{scope}        
+        % y^2=       
+
+
+        \draw[->] (0,0,-4) -- ++(1,0,0) node [above] {$d\vec{B}_1$};
+        \draw[->] (0,0,-4) -- ++(0,-1,0) node [right] {$d\vec{B}_2$};
+
+        \draw[->] (0,0,4) -- ++(-1,0,0) node [left] {$d\vec{B}_1$};
+        \draw[->] (0,0,4) -- ++(0,1,0) node [left] {$d\vec{B}_2$};        
+
+
+    \end{scope}    
+    \end{tikzpicture}
+\end{figure}
+
+Рассмотрим поле вертикального участка провода. 
+
+Используем ранее выведенную формулу для произвольного отрезка проводника с током $B^p=\frac{\beta I}{a}[\sin\alpha_2-\sin\alpha_1]$, где $\alpha_1=\pm\frac{\pi}{4}$, $\alpha_2=\frac{\pi}{2}$, а из постороения видно, что если $r$ -- координата на $AO$ с нулем в $A$, то $a(r)=r\sin\frac{\pi}{4}$. 
+
+Тогда поле вертикального участка провода даст
+\begin{equation*}
+    B_1=\frac{\sqrt{2}\beta I}{r}[1\pm\frac{1}{\sqrt{2}}]
+\end{equation*}
+
+Покрутив векторное произведение, легко увидеть, что горизонтальный участок провода даст такое же по направлению поле, а по модулю можно воспользоваться симметрией задачи. Тогда полное поле
+
+\begin{equation*}
+    B=\frac{2\beta I}{r}[\sqrt{2}\pm1]
+\end{equation*}
+
+Плюс - минус здесь появился из $\sin\alpha_1$ и при <<+>> соответствует углу 
+$-\frac{\pi}{4}$, т.е. координате на $AO$, а при <<->> на $AO'$ соответственно.
+
+На оси $B-B'$ $a(r)=r$:
+\begin{equation}
+    B_1=\frac{BI}{a},\quad
+    B_2=\frac{BI}{a}
+\end{equation}
+Тогда модуль поля будет
+\begin{equation*}
+    B=\sqrt{\left(\frac{BI}{a}\right)^2+\left(\frac{BI}{a}\right)^2}=
+        \frac{\sqrt{2}\beta I}{r}
+\end{equation*}
+
+
+\end{document}

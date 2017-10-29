@@ -1,0 +1,55 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+%   \begin{vmatrix}
+%   \text{душ}&  \text{душа} &  \text{душе}\\
+%   \text{душой}&  \text{душем} &  \text{души}\\
+%   \text{душа}&  \text{душем} &  \text{душесса}\\
+% \end{vmatrix}
+\input{\source/head.tex}
+\irodov{3.202}{Электростатика}
+\usepackage{mathrsfs}
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+\begin{document}
+% \begin{equation}
+% \end{equation}
+Емкость конденсатора без пластинки
+\begin{equation}
+  C=\frac{S}{4\pi k}\cdot\frac{1}{d}
+\end{equation}
+Нетрудно показать, что емкость конденсатора с пластинкой
+\begin{equation}
+  C'=\frac{S}{4\pi k}\cdot\frac{1}{d-\eta d}
+\end{equation}
+Тогда
+\begin{equation}
+  \Delta W = W_2-W_1=\frac{CU^2}{2}-\frac{C'U^2}{2}=
+  -\frac{SU^2}{8\pi k}
+  \left[
+    \frac{1}{d-\eta d}-
+    \frac{1}{d}
+  \right]=-\frac{SU^2}{8\pi k }\cdot\frac{\eta d}{d^2(1-\eta)}
+\end{equation}
+\begin{equation}
+  \Delta W = -\frac{CU^2}{2} \frac{\eta}{1-\eta}=-\frac32\cdot\frac{CU^2}{2}=-0.15 \text{ мДж}
+\end{equation}
+Источник при этом совершит работу
+\begin{equation}
+  A_{s}=U\Delta q=U(UC'-UC)=U^2(C'-C)=-2\Delta W
+\end{equation}
+Откуда
+\begin{equation}
+  A_{s}=\frac32 CU^2
+\end{equation}
+Отсюда найдем механическую работу $A_m$:
+\begin{equation}
+  A_m=\Delta W + A_s = \frac32\frac{CU^2}{2}=0.15 \text{ мДж}
+\end{equation}
+
+
+\end{document}

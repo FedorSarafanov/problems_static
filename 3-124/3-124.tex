@@ -1,0 +1,57 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodov{3.124}{Электростатика}
+\usepackage{mathrsfs}
+\begin{document}
+\begin{figure}[H]
+    \centering
+	\begin{circuitikz}
+		\draw (0,0)
+		to[battery1, l=$\mathscr{E}$] ++(0,2)
+		to[closing switch={K}] ++(2,0)
+		to[C=$C_2$] ++(0,-2)
+		to[] node[inputarrow, rotate=180] {} node[below] {1} ++(-2,0);
+		\draw (2,2)
+		to[C=$C_1$] ++(2,0);
+		% to[battery1=$\mathscr{E}$] ++(0,-2)		
+		% to[] ++(-2,0);
+		\draw (2,0)
+		to node[inputarrow, rotate=0] {} node[below] {2} ++(2,0)
+
+		to[battery1, l_=$\mathscr{E}$] ++(0,2);	
+		% to[C=$C_1$] ++(-2,0);		
+	\end{circuitikz}
+\end{figure}
+Найдем заряды на конденсаторах до замыкания ключа K, когда $C_1$ и $C_2$ включены последовательно.
+\begin{equation}
+	C=\frac{C_1C_2}{C_1+C_2}
+\end{equation}
+\begin{equation}
+	q_1=q_2=q=C\mathscr{E}
+\end{equation}
+После замыкания 
+\begin{equation}
+	q'_1=0,
+\end{equation}
+так как разность потенциалов на обкладках конденсатора равна нулю, и
+\begin{equation}
+	q'_2=C_2\mathscr{E}
+\end{equation}
+Через точки 1 и 2 протекает заряд
+\begin{equation}
+	Q_1+Q_2=q'_2-q_2=C_2\mathscr{E}-C\mathscr{E}
+\end{equation}
+Но с другой стороны, через точку 2 протек заряд
+\begin{equation}
+	Q_2=q'_1-q_1=-C\mathscr{E}
+\end{equation}
+Из двух последних уравнений получим ответ:
+\begin{equation}
+	Q_1=C_2\mathscr{E}
+\end{equation}
+\begin{equation}
+	Q_2=-\frac{C_1C_2}{C_1+C_2}\mathscr{E}
+\end{equation}
+
+\end{document}

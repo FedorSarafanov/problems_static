@@ -1,0 +1,28 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\yakovlev{34}{Электростатика}
+
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw[axis,->] (0,0) -- (8,0) node[right] {$+x$};
+        \draw[fill=magenta] (0,0) circle (3pt) node[above] {$q$} node[below] {$0$};
+        \draw[fill=magenta] (3,0) circle (3pt)node[left] {$P$};
+        \draw[] (4,0) circle (1cm) node[above] {$Q$} node[below] {$d$};
+    \end{tikzpicture} 
+\end{figure}
+
+Сосредоточим весь заряд $Q$ в точке $P$. Тогда потенциал в центре шара найдем как суперпозицию
+\begin{equation}
+    \phi_o=\phi_q(d)+\phi_Q(R)=\frac{kq}{d}+\frac{kQ}{R}
+\end{equation}
+
+Потенциал проводника во всех его точках одинаков, поэтому
+\begin{equation}
+    \phi_\text{ш}=\phi_o=\frac{kq}{d}+\frac{kQ}{R}
+\end{equation}
+
+\end{document}

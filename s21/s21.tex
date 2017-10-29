@@ -1,0 +1,65 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\yakovlev{21}{Электростатика}
+
+\begin{document}
+
+Решим задачу методом изображений, добавив три заряда: два для изображения плоскостей и третий -- для изображения поверхности нулевого потенциала на дополнениях плоскостей (без него задача несимметрична).
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw[interface] (0,0) rectangle ++(-0.2,4);
+        \draw[interface] (0,0) rectangle ++(4,-0.2);
+        \draw[] (0,0) -- ++(0,4);
+        \draw[] (0,0) -- ++(4,0);
+
+        \draw[fill=black!80] (0,0) -- (2,2) circle (2pt) node[above] {q};
+        \draw[dashed, draw=none] (0,0) -- (-135:{sqrt(8)}) circle (2pt) node[below, draw=white,white] {q};
+        \draw[dashed, draw=none] (0,0) -- (135:{sqrt(8)}) circle (2pt) node[below, draw=white,white] {-q};
+        \draw[dashed, draw=none] (0,0) -- (-45:{sqrt(8)}) circle (2pt) node[below, draw=white,white] {-q};
+        \draw[white] (4,0)--++(2,0);
+    \end{tikzpicture} 
+    \begin{tikzpicture}
+        \draw[interface] (0,0) rectangle ++(-0.2,4);
+        \draw[interface] (0,0) rectangle ++(4,-0.2);
+        \draw[] (0,0) -- ++(0,4);
+        \draw[] (0,0) -- ++(4,0);
+
+        \draw[fill=black!80] (0,0) -- (2,2) coordinate (*) circle (2pt) node[above] {q};
+        \draw[dashed] (0,0) -- (-135:{sqrt(8)}) circle (2pt) node[below] {q};
+        \draw[dashed] (0,0) -- (135:{sqrt(8)}) circle (2pt) node[below] {-q};
+        \draw[dashed] (0,0) -- (-45:{sqrt(8)}) circle (2pt) node[below] {-q};
+
+        \draw[force,->] (*) -- ++(180:1) node [above] {$\vec{F}_1$};
+        \draw[force,->] (*) -- ++(-90:1) node [below] {$\vec{F}_2$};
+        \draw[force,->] (*) -- ++(45:1) node [below] {$\vec{F}_3$};
+    \end{tikzpicture}     
+\end{figure}
+
+Cилу будем искать как суперпозицию сил трех зарядов:
+
+\begin{equation}
+    \vec{F}=\sum \vec{F}_i=\vec{F}_1+\vec{F}_2+\vec{F}_3
+\end{equation}
+
+Расстояние до плоскостей $l=\frac{d}{\sqrt{2}}$. 
+
+Сложение $\vec{F}_2$ и $\vec{F}_1$ в силу симметрии даст вектор, лежаший на оси $d$:
+\begin{equation}
+    f=|\vec{F_1}+\vec{F_2}|=\sqrt{2}F_1=
+    \sqrt{2}\frac{kq^2}{4l^2}=
+    \frac{kq^2}{\sqrt{2}d^2}
+\end{equation}
+Вектор $\vec{F}_3$ по модулю
+\begin{equation}
+    F_3=\frac{kq^2}{4d^2}
+\end{equation}
+
+Тогда найдем суммарную силу:
+\begin{equation}
+    \vec{F}=-\frac{kq^2\vec{d}}{d^3}\left(\sqrt{2}-\frac12\right)
+\end{equation}
+
+\end{document}

@@ -1,0 +1,72 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\yakovlev{28}{Электростатика}
+% Стыдить лжеца, шутить над дураком
+% И спорить с женщиной — всё то же,
+% Что черпать воду решетом:
+% От сих троих избавь нас, боже!..
+
+% М. Ю. Лермонтов.
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        % \draw[thick] (0,0) ++ (0,-2) node[below, blue] {$+q$} rectangle ++(0.1,4) ;
+        % \draw[thick] (8,0) ++ (0,-2) node[below, red] {$-q$} rectangle ++(-0.1,4);
+        \draw[dashed, blue,->] (-3,0) -- (9,0) node[thick,right] {$+x$};
+        \draw[draw=none] (0,4) (0,-4);
+        \fill[red] (0,0) circle (2pt) node[above,red] {$+q$};
+        \fill[red] (4,0) circle (4pt) node[above,red] {$+4q$};
+        \draw[magenta] (4+0.48*4,0) node[red] {$\times$};
+        \draw[magenta] (-0.18*4,0) node[red] {$\times$};
+        \draw[magenta] (4/3,0) node[red] {$\times$};
+        % \draw[axis] (0,2) -- (4,0) circle (2pt);
+        % \lineann[1]{90}{2}{$R$};
+        % \begin{scope}[xshift=0cm, yshift=2cm]
+        %     \lineann[1]{-28}{4.5}{$r$};
+        % \end{scope}
+           \lineann[-1]{0}{4}{$d$};
+    \end{tikzpicture} 
+\end{figure}
+
+Поле, создаваемое системой точечных зарядов:
+\begin{equation}
+	\vec{E}={k\cdot q}
+	\left(
+		\frac{\hat{r_1}}{r_1^2}+
+		\frac{4\hat{r_2}}{r_2^2}
+	\right)
+\end{equation}
+
+Из геометрических соображений, точка с нулевой напряженностью должна находится между зарядами, и решение такого уравнения
+\begin{equation}
+	0=
+	% \left(
+		\frac{1}{x_0^2}+
+		\frac{4}{(d-x_0)^2} 
+	% \right)
+\end{equation}
+имеющее физический смысл:
+\begin{equation}
+	x_0=\frac{d}{3}
+\end{equation}
+Потенциал в этой точке
+\begin{equation}
+	\phi(x_0)=\frac{kq}{x_0}+\frac{4kq}{d-x_0}=\frac{9kq}{d}
+\end{equation}
+Найдем точки на оси $x$ с таким же потенциалом:
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\frac{kq}{l}+\frac{4kq}{d+l}=\frac{9kq}{d}&, \quad x>d& \quad\Rightarrow\quad l=&\frac29d(\sqrt{10}-1)\approx0.48d\\
+		\frac{kq}{d+l}+\frac{4kq}{d}=\frac{9kq}{d}&, \quad x<0& \quad\Rightarrow\quad l=&\frac{\sqrt{13}-2}{9}d\approx0.18d
+	\end{aligned}
+	\right.
+\end{equation}
+
+
+%
+\end{document}

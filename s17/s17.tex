@@ -1,0 +1,130 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\yakovlev{17}{Электростатика}
+
+\begin{document}
+
+Ранее был выведен факт, что в системе двух зарядов поверхностью нулевого потенциала будет сфера. 
+
+Такой системой можно заменить исходную (только при $|x|<r$, так как при $|x|\in[r;R]$ $\vec{E}=0$), заряд $q'$ будет изображением заряда $q$.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        % \draw[thick] (0,0) ++ (0,-2) node[below, blue] {$+q$} rectangle ++(0.1,4) ;
+        % \draw[thick] (8,0) ++ (0,-2) node[below, red] {$-q$} rectangle ++(-0.1,4);
+        \draw[->] (-1,0) -- node[above, xshift=-0.6em] {$r$} ++(50:2);
+        \draw[dashed, blue,->] (-3,0) -- (9,0) node[thick,right] {$+x$};
+        % \draw[draw=none] (0,4) (0,-4);
+        \fill[red] (0,0) circle (4pt) node[above,red] {$q$};
+        \fill[blue] (4,0) circle (4pt) node[above,blue] {$q'$};
+        % \draw[magenta] (4+0.48*4,0) node[red] {$\times$};
+        % \draw[magenta] (-0.18*4,0) node[red] {$\times$};
+        \draw[magenta] (-1,0) node[red] {$\times$};
+        \draw[magenta,dashed] (-1,0) circle (2cm);
+        % \draw[axis] (0,2) -- (4,0) circle (2pt);
+        % \lineann[1]{90}{2}{$r$};
+        \begin{scope}[xshift=-1cm, yshift=0cm]
+            \lineann[-1.2]{0}{5}{$l$};
+           	\lineann[-0.7]{0}{1}{$d$};
+        \end{scope}
+    \end{tikzpicture} 
+\end{figure}
+
+Нам известны $r,q,d$. Тогда решим систему, считая равным нулю в точках $x=\pm r$:
+\begin{equation}
+	\left\{
+	\begin{aligned}
+ 	\frac{kq}{l-r}+\frac{kq'}{r-d}=0\\
+ 	\frac{kq}{l+r}+\frac{kq'}{r+d}=0
+ 	\end{aligned}
+ 	\right. \quad \Rightarrow \quad 
+	\left\{
+	\begin{aligned}
+ 	q'=-q\frac{r}{d}\\
+ 	l=\frac{r^2}{d}
+ 	\end{aligned}
+ 	\right. 	
+ \end{equation} 
+
+Воспользуемся теоремой Гаусса-Остроградского. Выберем поверхность - цилиндр, одним донышком лежащий на сфере в точке $C$, вторым внутри сферы. Цилиндр должен быть достаточно мал, чтобы поток через его боковую поверхность был равен нулю. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        % \draw[thick] (0,0) ++ (0,-2) node[below, blue] {$+q$} rectangle ++(0.1,4) ;
+        % \draw[thick] (8,0) ++ (0,-2) node[below, red] {$-q$} rectangle ++(-0.1,4);
+        % \draw[->] (-1,0) -- node[above, xshift=-0.6em] {$r$} ++(50:2);
+        \draw (-3,-0.25) rectangle ++ (0.5,0.5) node[above] {$C$};
+        \draw (0.5,-0.25) rectangle ++ (0.5,0.5) node[above] {$B$};
+        \draw[dashed, blue,->] (-3,0) -- (9,0) node[thick,right] {$+x$};
+        % \draw[draw=none] (0,4) (0,-4);
+        \fill[red] (0,0) circle (4pt) node[above,red] {$q$};
+        \fill[blue] (4,0) circle (4pt) node[above,blue] {$q'$};
+        % \draw[magenta] (4+0.48*4,0) node[red] {$\times$};
+        % \draw[magenta] (-0.18*4,0) node[red] {$\times$};
+        \draw[magenta] (-1,0) node[red] {$\times$};
+        \draw[magenta,dashed] (-1,0) circle (2cm);
+        % \draw[axis] (0,2) -- (4,0) circle (2pt);
+        % \lineann[1]{90}{2}{$r$};
+        \begin{scope}[xshift=-1cm, yshift=0cm]
+            \lineann[-1.2]{0}{5}{$l$};
+           	\lineann[-0.7]{0}{1}{$d$};
+        \end{scope}
+    \end{tikzpicture} 
+\end{figure}
+Тогда с левой стороны:
+\begin{equation}
+	\oiint\limits_{S}(\vec{E},\vec{dS})=
+	-\frac{kqS}{(r+d)^2}+
+	\frac{k|q'|S}{(r+l)^2}
+	=k4\pi q_{in}= -k4\pi\sigma_c\cdot S
+\end{equation}
+Минус справа здесь, чтобы плотность была модулем (изнутри заряд индуцирован отрицательный).
+Откуда нетрудно показать, что
+\begin{equation}
+	\sigma_c=\frac{q}{4\pi}
+	\left[
+	\frac{1}{(r+d)^2}-
+	\frac{r}{d(r+r^2/d)^2}
+	\right]=
+	\frac{q}{4\pi(r+d)^2}
+	\left[
+	1-\frac{d}{r}
+	\right]
+\end{equation}
+
+Аналогично с правой 
+\begin{equation}
+	\oiint\limits_{S}(\vec{E},\vec{dS})=
+	-
+	\frac{kqS}{(r-d)^2}+
+	\frac{k|q'|S}{(l-r)^2}
+	=k4\pi q_{in2}= -k4\pi\sigma_b\cdot S
+\end{equation}
+\begin{equation}
+	\sigma_b=\frac{q}{4\pi}
+	\left[
+	\frac{1}{(r-d)^2}-
+	\frac{r}{d(r^2/d-r)^2}
+	\right]=
+	\frac{q}{4\pi(r-d)^2}
+	\left[
+	1+\frac{d}{r}
+	\right]	
+\end{equation}
+
+Индуцированный заряд снаружи распределен равномерно, и по модулю равен $q$ (можно показать через т.Гаусса). Тогда
+\begin{equation}
+	\sigma=\frac{q}{4\pi R^2}
+\end{equation}
+
+Потенциал вне такого сферического слоя  будет таким же, как и потенциал точечного заряда $q$ в её центре. Тогда на внешней поверхности:
+\begin{equation}
+	\phi=\frac{q}{R}
+\end{equation}
+
+\end{document}

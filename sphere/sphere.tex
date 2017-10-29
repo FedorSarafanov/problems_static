@@ -1,0 +1,51 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\wrote{Шар}{Электростатика}
+
+\begin{document}
+
+\begin{tikzpict}
+	\draw[th] (0,0) circle (2cm);
+	\draw[dashed] (0,0) circle (1.8cm);
+	\draw[draw=none] (-5,0) (5,0); % Выравнивание по центру
+	\draw[axis,->] (0,0) -- (4,0) node[right] {$+r$};
+	\foreach \i in {0,10,...,360}{
+		\draw[magenta,->] (\i:3) -- (\i:1.5);
+	}
+\end{tikzpict}
+Пусть дано распределение потенциала 
+\begin{equation}
+	\phi(r)=ar^2+b
+\end{equation}
+Тогда
+\begin{equation}
+	E(r)=-\diffp{\phi}{r}=-2ar
+\end{equation}
+C одной стороны,
+\begin{align}
+	\oiint\limits_{(S)}\vec{E}\,d\vec{S}=\label{eq:3}
+	k\cdot 4\pi q_{in}=&
+	k\cdot 4\pi \iiint\limits_{(V)}\rho dV=
+	k\cdot 4\pi \int\limits_{(r)} \rho(r)\cdot 4\pi r^2\, dr=\\
+	=& 
+	k\cdot 16\pi^2 \int\limits_{(r)} \rho(r)r^2\,dr
+\end{align}
+%Где $\rho=\rho(r)$ из соображений симметрии.
+Если расписывать сам интеграл (\ref{eq:3}):
+\begin{equation}
+	\oiint\limits_{(S)}\vec{E}\,d\vec{S}=
+	-2ar\cdot 4\pi r^2
+\end{equation}
+Тогда
+\begin{equation}
+	-2ar\cdot 4\pi r^2=k\cdot 16\pi^2 \int\limits_{(r)} \rho(r)r^2\,dr \quad\bigg| \frac{d}{dr}
+\end{equation}
+\begin{equation}
+	-6ar^2=k\cdot 4\pi \rho(r)r^2
+\end{equation}
+Откуда окончательно
+\begin{equation}
+	\rho=-\frac{3a}{2k\pi}
+\end{equation}
+\end{document}

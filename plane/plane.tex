@@ -1,0 +1,116 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\wrote{Пластины}{Электростатика}
+
+\begin{document}
+0) Заряжены пластины A и B.
+\begin{tikzpict}
+	\draw (0,0) node[below] {A} -- ++(0,4) node[right, pos=0.5] {$+q$};
+	\draw (8,0) node[below] {B} -- ++(0,4) node[left, pos=0.5] {$-q$};
+	\lineann[-1.5]{0}{8}{$d_0$};
+\end{tikzpict}
+
+1) Вставили пластины $C$ и $D$
+
+\begin{tikzpict}
+	\draw (0,0) node[below] {A} -- ++(0,4) node[right, pos=0.5] {$+q$};
+
+	\draw[interface] (2,0) rectangle ++(1,4);
+	\draw (2,0) node[below] {C$_A$} -- ++(0,4) node[left, pos=0.5] {$-q_i$};
+	\draw (3,0) node[below] {C$_D$} -- ++(0,4) node[right, pos=0.5] {$+q_i$};
+
+	\draw[interface] (5,0) rectangle ++(1,4);
+	\draw (5,0) node[below] {D$_C$} -- ++(0,4) node[left, pos=0.5] {$-q_i$};
+	\draw (6,0) node[below] {D$_B$} -- ++(0,4) node[right, pos=0.5] {$+q_i$};
+
+
+	\draw (8,0) node[below] {B} -- ++(0,4) node[left, pos=0.5] {$-q$};
+	% \lineann[-1.5]{0}{8}{$d_0$};
+\end{tikzpict}
+
+2) Замкнули $C$ и $D$
+
+\begin{tikzpict}
+	\draw (0,0) node[below] {A} -- ++(0,4) node[right, pos=0.5] {$+q$};
+
+	\draw[interface] (2,0) rectangle ++(1,4);
+	\draw (2,0) node[below] {C$_A$} -- ++(0,4) node[left, pos=0.5] {$-q_i$};
+	\draw (3,0) node[below] {C$_D$} -- ++(0,4);% node[right, pos=0.5] {$+q_i$};
+
+	\draw[interface] (5,0) rectangle ++(1,4);
+	\draw (5,0) node[below] {D$_C$} -- ++(0,4);% node[left, pos=0.5] {$-q_i$};
+	\draw (6,0) node[below] {D$_B$} -- ++(0,4) node[right, pos=0.5] {$+q_i$};
+
+	\draw (3,2) -- (5,2);
+
+	\draw (8,0) node[below] {B} -- ++(0,4) node[left, pos=0.5] {$-q$};
+	% \lineann[-1.5]{0}{8}{$d_0$};
+\end{tikzpict}
+Можно представить как два последовательно соединенных конденсатора. Энергия такой системы будет
+\begin{equation}
+	W_2=\frac{q^2}{2C_{a-c}}+\frac{q^2}{2C_{d-b}}
+\end{equation}
+где
+\begin{equation}
+	C_{a-c}=\frac{S}{k\cdot4\pi x}, \quad
+	C_{d-b}=\frac{S}{k\cdot4\pi (d_0-x-d)}
+\end{equation}
+Тогда
+\begin{equation}
+	W_2=\frac{q^2}{2S}\cdot k\cdot 4\pi (d_0-d)
+\end{equation}
+
+3) Разомкнули $C$ и $D$ и поменяли местами
+
+\begin{tikzpict}
+	\draw (0,0) node[below] {A} -- ++(0,4) node[right, pos=0.5] {$+q$};
+
+	\draw[interface] (2,0) rectangle ++(1,4);
+	\draw (2,0) node[below] {D$_A$} -- ++(0,4) node[left, pos=0.5] {$-q_i$};
+	\draw (3,0) node[below] {D$_C$} -- ++(0,4) node[right, pos=0.33] {$+q_i$} node[right, pos=0.66] {$+q$};
+
+	\draw[interface] (5,0) rectangle ++(1,4);
+	\draw (5,0) node[below] {C$_D$} -- ++(0,4) node[left, pos=0.33] {$-q_i$}  node[left, pos=0.66] {$-q$};
+	\draw (6,0) node[below] {C$_B$} -- ++(0,4) node[right, pos=0.5] {$+q_i$};
+
+
+	\draw (8,0) node[below] {B} -- ++(0,4) node[left, pos=0.5] {$-q$};
+	% \lineann[-1.5]{0}{8}{$d_0$};
+\end{tikzpict}
+После соединения на пластинах $C$ и $D$ с внутренней стороны сосредотачивался заряд $+q$ и $-q$ соотвественно. 
+
+После разъединения и переворота там еще должно произойти разделение индуцированных зарядов. При этом индуцированный заряд $q_i$ должен быть равен $q$, но тогда на внутренних сторонах $D_C$ и $C_D$ будут заряды $+2q$ и $-2q$ соответственно.
+
+Можно найти энергию эквивалентной системы:
+\begin{figure}[H]
+    \centering
+	\begin{circuitikz}
+		\draw (0,0)
+		to[] ++(0,2)
+		to[C=$C_{AD_A}$] ++(2,0)
+		to[C=$C_{D_CC_D}$] ++(0,-2)
+		to[] ++(-2,0)
+		to[] ++ (5,0)
+		to[] ++ (0,2);
+		\draw (2,2)
+		to[C=$C_{D_AB}$] ++(3,0);
+		% to[battery1=$\mathscr{E}$] ++(0,-2)		
+		% to[] ++(-2,0);
+	\end{circuitikz}
+\end{figure}
+
+\begin{equation}
+	W_3=\frac{q^2}{2C_{AD_A}}+
+	\frac{4q^2}{2C_{D_CC_D}}+
+	\frac{q^2}{2C_{D_BB}}=\frac{4\pi k q^2}{2S}(x+4d+d_0-x-d)=\frac{4\pi k q^2}{2S}(3d+d_0)
+\end{equation}
+
+Тогда
+\begin{equation}
+	A=W_3-W_2=\frac{4\pi k q^2}{2S}(3d+d_0)-
+	\frac{q^2}{2S}\cdot k\cdot 4\pi (d_0-d)=
+	\frac{k4\pi  q^2}{2S}\cdot 4d=\frac{k\pi8q^2}{S}
+\end{equation}
+
+\end{document}

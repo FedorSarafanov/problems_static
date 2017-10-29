@@ -1,0 +1,72 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodov{3.113}{Электростатика}
+% Стыдить лжеца, шутить над дураком
+% И спорить с женщиной — всё то же,
+% Что черпать воду решетом:
+% От сих троих избавь нас, боже!..
+
+% М. Ю. Лермонтов.
+\begin{document}
+
+Воспользуемся методом изображений. В данном случае поле эквивалентно системе двух шариков, симметричных относительно плоскости и противоположно заряженных:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+
+        % \draw[thick] (0,0) ++ (0,-2) node[below, blue] {$+q$} rectangle ++(0.1,4) ;
+        % \draw[thick] (8,0) ++ (0,-2) node[below, red] {$-q$} rectangle ++(-0.1,4);
+        % \draw[->] (-1,0) -- node[above, xshift=-0.6em] {$r$} ++(50:2);
+        \draw[dashed, blue,->] (-5,0) -- (5,0) node[thick,right] {$+x$};
+        % % \draw[draw=none] (0,4) (0,-4);
+        % \fill[red] (0,0) circle (4pt) node[above,red] {$q$};
+        % \fill[blue] (4,0) circle (4pt) node[above,blue] {$q'$};
+        % % \draw[magenta] (4+0.48*4,0) node[red] {$\times$};
+        % % \draw[magenta] (-0.18*4,0) node[red] {$\times$};
+        % \draw[magenta] (-1,0) node[red] {$\times$};
+        \draw[magenta] (-3,0) circle (1cm);
+        \draw[fill=magenta] (-3,0) circle (2pt) node [above] {0} node [below] {$+q$};
+        \draw[fill=magenta] (3,0) circle (2pt) node [below] {$-q$};
+        \draw[magenta, dashed] (3,0) circle (1cm);
+        % \draw[axis] (0,2) -- (4,0) circle (2pt);
+        % \lineann[1]{90}{2}{$r$};
+        \lineann[-2]{0}{-3}{$l$};
+        \lineann[2]{0}{-2}{$l-a$};
+        \draw[magenta] (0,-2.5) -- (0,2.5);
+    \end{tikzpicture} 
+\end{figure}
+
+Напряженность поля на оси, по принципу суперпозиции
+\begin{equation}
+    E(x)=\frac{kq}{x^2}+\frac{kq}{(2l-x)^2}
+\end{equation}
+Тогда
+\begin{gather}
+    \Delta\phi=\int\limits_a^l 
+    \left[
+    \frac{kq}{x^2}+\frac{kq}{(2l-x)^2}
+    \right]dx=
+    kq\left[
+        \frac{1}{2l-x}
+        -
+        \frac{1}{x}
+    \right]\bigg|_a^l=\\=
+    kq\left[\frac{1}{l}-\frac{1}{l}-\frac{1}{2l-a}+\frac{1}{a}\right]
+    % kq\left[\frac{1}{a}-\frac{1}{l}-\frac{1}{a-2l}+\frac{1}{l}\right]
+    =
+    kq\left[\frac{1}{a}-\frac{1}{2l-a}\right]
+\end{gather}
+\begin{equation}
+    \Delta\phi=kq\frac{2l-2a}{2al-a^2}
+\end{equation}
+Если $l\gg a$, то
+\begin{equation}
+    \Delta\phi\approx \frac{kq}{a}
+\end{equation}
+\begin{equation}
+    C=\frac{q}{\Delta\phi}=\frac{a}{k}
+\end{equation}
+
+\end{document}

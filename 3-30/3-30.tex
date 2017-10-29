@@ -1,0 +1,105 @@
+\documentclass[a5paper,10pt]{article}\usepackage[usenames,dvipsnames]{color}\usepackage{extsizes,cmap,graphicx,misccorr,indentfirst,makecell,multirow,ulem,geometry,amssymb,amsfonts,amsmath,amsthm,titlesec,float,fancyhdr,wrapfig,tikz,pgfplots}\usepackage[T2A]{fontenc}\usepackage[utf8x]{inputenc}\usepackage[english, russian]{babel}\usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing,patterns,calc,scopes,arrows,through,positioning,shapes.misc}\graphicspath{{img/}}\linespread{1.3}\frenchspacing\geometry{left=1cm, right=1cm, top=2cm, bottom=1cm, bindingoffset=0cm}\pagestyle{fancy}\fancyhead{}\fancyhead[R]{Сарафанов Ф.Г.} 
+\fancyhead[C]{Электростатика}
+\fancyhead[L]{Иродов -- №3.30} 
+\fancyfoot{}
+\renewcommand{\labelenumii}{\theenumii)}
+\tikzset{
+	force/.style={>=latex,draw=blue,fill=blue,>=triangle 45},
+    axis/.style={densely dashed,blue},
+    interface1/.style={draw=gray!60,.
+        postaction={draw=gray!60,decorate,decoration={border,angle=-135,
+        amplitude=0.3cm,segment length=2mm}}},
+    interface/.style={
+        pattern = north east lines,
+        draw    = none,
+        pattern color=gray!60,          
+    },
+    plank/.style={
+        fill=black!60, 
+        draw=black,
+        minimum width=3cm,
+        inner ysep=0.1cm,
+        outer sep=0pt,
+        yshift=0.75cm,
+        pattern = north east lines,
+        pattern color=gray!60, 
+    },
+    cargo/.style={
+        rectangle,
+        fill=black!70,              
+        inner sep=2.5mm,
+    }	
+}
+
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % \draw (0,0) node[left]{$\phi_0$} circle (1cm)
+        %     circle (2cm);
+        % \draw[fill=black] (0,0) circle (2pt);
+        % \draw[axis,->] (0,0) -- (3,0) node[right] {$+r$};
+        % %
+        % \lineann[4]{90}{2}{$R_2$};
+        % \lineann[3]{90}{1}{$R_1$};
+        \fill[magenta!10] (0,0) circle (2);
+        \fill[white] (0,0) circle (1.75);
+        \draw[black,thick] (0,0) circle (2);
+        \foreach \i in {1.75,2}{
+            \draw[black!50] (0,0) circle (\i);
+        };
+        \foreach \angle in {0,10,...,360}{
+            \draw[black,thick] (0,0) ++ (\angle:1.75) -- ++ (\angle:0.25);
+        };
+
+        \draw[thick] (3,0) ++ (0,-2) rectangle ++(0.1,4);
+        \draw[dashed, blue,->] (3,0) -- (8,0) node[thick,right] {$+x$};
+
+        \draw[axis] (3,2) -- (7,0) circle (2pt);
+        \begin{scope}[xshift=3cm]
+            % \lineann[0.5]{90}{1.3}{$h$};
+            \lineann[1]{90}{2}{$R$};
+        \end{scope}
+        \begin{scope}[xshift=3cm, yshift=2cm]
+            \lineann[1]{-28}{4.5}{$r$};
+        \end{scope}
+        \begin{scope}[xshift=3cm, yshift=0cm]
+            \lineann[-1]{0}{4}{$x$};
+        \end{scope}
+    \end{tikzpicture} 
+\end{figure}
+
+Так как все заряды на кольце расположены на одном и том же расстоянии ($r=\sqrt{x^2+R^2}$) от произвольно выбранной точки наблюдения на оси кольца, то потенциал (при условии, что $\phi(x\to\infty)=0$) можно записать как
+
+\begin{equation}
+    \phi(x)=\int\limits_{(q)} k\frac{dq}{r}=k\frac{q}{r}
+\end{equation}
+
+Так как поле потенциально, то работа при перемещении не зависит от траектории, и по определению  потенциала такая работа будет
+
+\begin{equation}
+    A_{0\to l}=q'(\phi(0)-\phi(l))=kqq'(\frac{1}{R}-\frac{1}{\sqrt{R^2+l^2}})
+\end{equation}
+\begin{equation}
+    A=10\cdot3\cdot10^3\cdot5\cdot3\cdot10^3(\frac{1}{25}-\frac{1}{\sqrt{25^2+50^2}})=9.95\cdot10^6 \text{ erg}
+\end{equation}
+
+\end{document}

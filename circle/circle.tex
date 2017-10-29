@@ -1,0 +1,369 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\wrote{Кольца}{Электростатика}
+% Стыдить лжеца, шутить над дураком
+% И спорить с женщиной — всё то же,
+% Что черпать воду решетом:
+% От сих троих избавь нас, боже!..
+
+% М. Ю. Лермонтов.
+\begin{document}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % \draw (0,0) node[left]{$\phi_0$} circle (1cm)
+        %     circle (2cm);
+        % \draw[fill=black] (0,0) circle (2pt);
+        % \draw[axis,->] (0,0) -- (3,0) node[right] {$+r$};
+        % %
+        % \lineann[4]{90}{2}{$R_2$};
+        % \lineann[3]{90}{1}{$R_1$};
+        % \fill[magenta!10] (0,0) circle (2);
+        % \fill[white] (0,0) circle (1.75);
+        % \draw[black,thick] (0,0) circle (2);
+        % \foreach \i in {1.75,2}{
+        %     \draw[black!50] (0,0) circle (\i);
+        % };
+        % \foreach \angle in {0,10,...,360}{
+        %     \draw[black,thick] (0,0) ++ (\angle:1.75) -- ++ (\angle:0.25);
+        % };
+
+        \draw[thick] (0,0) ++ (0,-2) node[below, blue] {$+q$} rectangle ++(0.1,4) ;
+        \draw[thick] (8,0) ++ (0,-2) node[below, red] {$-q$} rectangle ++(-0.1,4);
+        \draw[dashed, blue,->] (0,0) -- (9,0) node[thick,right] {$+x$};
+
+        \draw[axis] (0,2) -- (4,0) circle (2pt);
+        \lineann[1]{90}{2}{$R$};
+        \begin{scope}[xshift=0cm, yshift=2cm]
+            \lineann[1]{-28}{4.5}{$r$};
+        \end{scope}
+            \lineann[-1]{0}{8}{$l$};
+    \end{tikzpicture} 
+\end{figure}
+
+Из геометрических соображений, расстояние от точки наблюдения с координатой $x$ до положительного кольца, где $a=l/2$:
+\begin{equation}
+	L_+=|x+a| \quad\Rightarrow\quad
+	r_+=\sqrt{(x+a)^2+R^2}
+\end{equation}
+До отрицательного:
+\begin{equation}
+	L_-=|x-a|	\quad\Rightarrow\quad
+	r_-=\sqrt{(x-a)^2+R^2}
+\end{equation}
+
+Потенциал кольца в точке на оси, расстояние от которой до любой точки кольца равно $r$:
+\begin{equation}
+	\phi=k\int\limits_{q} \frac{dq}{r}=\frac{kq}{r}
+\end{equation}
+Тогда суммарный потенциал обоих колец на оси
+\begin{align}
+	\phi(x)=\phi_++\phi_-
+	=
+	kq
+	\left[	
+	\frac{1}{
+		\left(
+			\left(x+a\right)^2+R^2
+		\right)^{1/2}
+	}
+	-
+	\frac{1}{
+		\left(
+			\left(x-a\right)^2+R^2
+		\right)^{1/2}
+	}	
+	\right]
+\end{align}
+% Разложение дробей в ряд Лорана до второго члена $(x\to\infty, x\gg R\gg a)$ даст
+% \begin{align}
+% 	\phi=kq
+% 	\left[	
+% 		\frac{1}{x}-\frac{a}{x^2}-\frac{1}{x}-\frac{a}{x^2}
+% 	\right]=-k\frac{2qa}{x^2}=-k\frac{p}{x^2}
+% 	% =
+% 	% \frac{kq}{R}
+% 	% \left[	
+% 	% \frac{\sqrt{\left(\frac{x-a}{R}\right)^2+1}-\sqrt{\left(\frac{x+a}{R}\right)^2+1}}{
+% 	% 	\sqrt{
+% 	% 	\left(
+% 	% 		\left(\frac{x+a}{R}\right)^2+1
+% 	% 	\right)
+% 	% 	\left(
+% 	% 		\left(\frac{x-a}{R}\right)^2+1
+% 	% 	\right)		
+% 	% 	}
+% 	% }
+% 	% \right]	
+% 	% \left[
+% 	% 	\left[
+% 	% 		(x+a)^2+R^2
+% 	% 	\right]^{-1/2}
+% 	% 	-
+% 	% 	\left[
+% 	% 		(x-a)^2+R^2
+% 	% 	\right]^{-1/2}		
+% 	% \right]
+% \end{align}
+% Где
+% \begin{equation}
+% 	\sqrt{\left(\frac{x-a}{R}\right)^2+1}=1+\frac12\left(\frac{x-a}{R}\right)^2
+% \end{equation}
+% \begin{equation}
+% 	\sqrt{\left(\frac{x+a}{R}\right)^2+1}=1+\frac12\left(\frac{x+a}{R}\right)^2
+% \end{equation}
+% И тогда
+% \begin{equation}
+% 	\phi(x)=
+% 	\frac{kq}{R}
+% 	\left[	
+% 	\frac{
+% 		1+\frac12\left(\frac{x-a}{R}\right)^2-
+% 		1-\frac12\left(\frac{x+a}{R}\right)^2
+% 	}{
+% 		\left(
+% 			1+\frac12\left(\frac{x-a}{R}\right)^2
+% 		\right)
+% 		\left(
+% 			1+\frac12\left(\frac{x+a}{R}\right)^2
+% 		\right)		
+% 	}
+% 	\right]=
+% \end{equation}
+% \begin{equation}
+% 	=
+% 	\frac{1kqR}{2}
+% 	\left[	
+% 	\frac{
+% 		% \left(\frac{x-a}{R}\right)^2-
+% 		% \left(\frac{x+a}{R}\right)^2
+% 		-2a\cdot 2x
+% 	}{
+% 		a^4+4 a^2 R^2-2 a^2 x^2+4 R^4+4 R^2 x^2+x^4	
+% 	}
+% 	\right]=
+% \end{equation}
+Тогда
+\begin{equation}
+	E_x=-\diffp{\phi}{x}
+	=
+	kq
+	\left[	
+	\frac{x+a}{
+		\left(
+			\left(x+a\right)^2+R^2
+		\right)^{3/2}
+	}
+	-
+	\frac{x-a}{
+		\left(
+			\left(x-a\right)^2+R^2
+		\right)^{3/2}
+	}	
+	\right]
+\end{equation}
+
+Это точное рассмотрение, которое верно вне зависимости от размера элементов системы и положения точки наблюдения на оси.
+
+При рассмотрении на бесконечности будет проще решить задачу, используя выведенное ранее выражение для потенциала диполя, предпологая, что два кольца образуют систему из диполей, образованных зарядом $dq$ на одном кольце и $-dq$ на другом. 
+
+Очевидно, что в силу принципа суперпозиции и радиальной симметрии задачи задачу можно решать для диполя ${+q,-q}$ следующего вида:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw[thick] (0,2) circle (2pt) node[above, blue] {$+q$};% rectangle (0.1,4) ;
+        \draw[thick] (8,2) circle (2pt) node[above, red] {$-q$};% rectangle ++(-0.1,4);
+        \draw[<-, thick, blue] (0,2) -- node[above] {$\vec{l}$} (8,2);
+        \draw[dashed, blue,->] (0,0) -- (9,0) node[thick,right] {$+x$};
+
+        \draw[axis] (4,2) -- (8,0) circle (2pt);
+        \lineann[1]{90}{2}{$R$};
+        \begin{scope}[xshift=4cm, yshift=2cm]
+            \lineann[1]{-28}{4.5}{$r$};
+        \end{scope}
+            % \lineann[-1]{0}{8}{$l$};
+    \end{tikzpicture} 
+\end{figure}
+
+Тогда на достаточно больших расстояниях ($r\gg l $)
+\begin{equation}
+	\phi(\vec{r})=k\frac{q(\vec{l},\,\vec{r})}{r^3}
+\end{equation}
+
+Очевидно, что при наложении условия $r \gg R$ выполняется $r\to x$, и тогда 
+\begin{equation}
+	\phi(x)=k\frac{(\vec{p},x\vec{i})}{x^3}=-sign(x)k\frac{p}{x^2}
+\end{equation}
+
+% Где на бесконечности $\cos(l,r)=1$, и 
+% \begin{equation}
+% 	\frac{|x|}{x}=\left\{
+% 	\begin{aligned}
+% 		-1,\quad x>0\\
+% 		1,\quad x<0
+% 	\end{aligned}=-sign(x)
+% 	\right.
+% \end{equation}
+
+% % \begin{equation}
+	
+% % \end{equation}
+
+% При $x\gg R\gg a$
+% \begin{equation}
+% 	E_x=
+% 	kq
+% 	\left[	
+% 	\frac{1}{
+% 		\left(
+% 			x-a
+% 		\right)^2
+% 	}
+% 	-
+% 	\frac{1}{
+% 		\left(
+% 			x+a
+% 		\right)^2
+% 	}
+% 	\right]
+% % \end{equation}
+% \begin{equation}
+% 	\phi(x)=
+% 	\frac{kq}{x}
+% 	\left[	
+% 	\frac{1}{
+% 		1+a/x
+% 	}
+% 	-
+% 	\frac{1}{
+% 		1-a/x
+% 	}
+% 	\right]=-kq\frac{2a}{x^2-a^2}
+% \end{equation}
+% \begin{equation}
+% 	E_x=%-\diffp{\phi}{x}
+% 	% =
+% 	\frac{kq}{x^2}
+% 	\left[	
+% 	\frac{1}{
+% 		(1+a/x)^2
+% 	}
+% 	-
+% 	\frac{1}{
+% 		(1-a/x)^2
+% 	}
+% 	\right]	
+% \end{equation}
+% При наложении дополнительного условия $x\gg a$ разложим дроби в ряд Тейлора до второго члена:
+% \begin{equation}
+% 	\frac{1}{1\pm a/x}=(1\pm a/x)^{-1}=1\mp a/x+\ldots \approx 1\mp a/x
+% \end{equation}
+% \begin{equation}
+% 	\frac{1}{(1\pm a/x)^2}=(1\pm a/x)^{-2}=1\mp 2a/x+\ldots \approx 1\mp 2a/x
+% \end{equation}
+% Тогда
+% \begin{equation}
+% 	\phi(x)=
+% 	\frac{kq}{x}
+% 	\left[	
+% 	1-a/x-(1+a/x)
+% 	\right]
+% 	=
+% 	-2a\frac{kq}{x^2}=-k\frac{p}{x^2}
+% \end{equation}
+Тогда найдем $E_x(x)$:
+\begin{equation}
+	E_x=-\diffp{\phi}{x}=-k\frac{2p}{x^3}
+\end{equation}
+
+
+\begin{figure}[h]
+\begin{minipage}[h]{0.49\linewidth}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			enlargelimits=false,
+			% ymax = 0.5,
+			xtick=\empty,
+			ytick=\empty,
+ 			axis x line*=bottom,
+  			axis y line*=left, 	
+  			xlabel=$x$,
+  			ylabel=$\phi(x)$,
+  			axis y line=middle,
+			axis x line=middle,
+			every axis x label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=west,
+			},
+			every axis y label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=south,
+			},  			
+		]
+			% \addplot[domain=-10:10, samples=500]{(x-1)/((x-1)^2+1)^(3/2)-(x+1)/((x+1)^2+1)^(3/2)};
+
+			\addplot[domain=-10:10, samples=100]{%
+			1/sqrt((x+1)^2+1^2)-
+			1/sqrt((x-1)^2+1^2)%
+			};		
+
+			% \addplot[domain=-10:10, samples=100]{%
+			% (abs(x-1)-abs(x+1))/(x^2+1)
+			% };				
+
+		\end{axis}
+	\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			enlargelimits=false,
+			% ymax = 0.5,
+			xtick=\empty,
+			ytick=\empty,
+ 			axis x line*=bottom,
+  			axis y line*=left, 	
+  			xlabel=$x$,
+  			ylabel=$E_x(x)$,
+  			axis y line=middle,
+			axis x line=middle,
+			every axis x label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=west,
+			},
+			every axis y label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=south,
+			},  			
+		]
+			% \addplot[domain=-10:10, samples=500]{(x-1)/((x-1)^2+1)^(3/2)-(x+1)/((x+1)^2+1)^(3/2)};
+
+			% \addplot[domain=-10:10, samples=500]{(x-1)/((x-1)^2)^(3/2)-(x+1)/((x+1)^2)^(3/2)};			
+			% \addplot[domain=-10:10, samples=100]{%
+			% (x+1)/((x+1)^2+1^2)^(3/2)-
+			% (x-1)/((x-1)^2+1^2)^(3/2)
+			% };			
+			\addplot[domain=-10:10, samples=180]{%
+			(x+1)/((x+1)^2+1^2)^(3/2)-
+			(x-1)/((x-1)^2+1^2)^(3/2)
+			};	
+
+			% \addplot[domain=-10:10, samples=180]{%
+			% (x)/(x^2+0.001*2*x+1^2)^(3/2)-
+			% (x)/(x^2-0.001*2*x+1^2)^(3/2)
+			% };
+			% \addplot[domain=-1:1, samples=100]{%
+			% 1/((x+0.1)^2)
+			% };										
+		\end{axis}
+	\end{tikzpicture}≫
+\end{minipage}
+\end{figure}
+%
+\end{document}

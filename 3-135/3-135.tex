@@ -1,0 +1,61 @@
+\documentclass[a4paper,14pt]{extarticle}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodov{3.135}{Электростатика}
+\usepackage{mathrsfs}
+\begin{document}
+\begin{figure}[H]
+    \centering
+	\begin{circuitikz}
+	 \draw
+		(0,0) node[spdt] (Sw) {}
+		(Sw.in) node[left] {}
+		(Sw.out 1) node[above, xshift=-0.75em] {1}
+		(Sw.out 2) node[below, xshift=-0.75em] {2};
+		\draw (Sw.in)
+		to [C, l_=$C$] ++ (-2,0)
+		to ++(0,-2)
+		to[battery1, i_=$\mathscr{E}_1$,] ++(4,0) 
+		-| coordinate (x) (Sw.out 2);
+
+		\draw (x)++(2.5,0)
+		to[battery1, i^=$\mathscr{E}_2$,] ++(-2.5,0);
+
+		\draw (Sw.out 1) -| ($(x)+(2.5,0)$);
+
+	\end{circuitikz}
+\end{figure}
+Найдем энергию конденсатора при ключе в положении 1, когда $\mathscr{E}_1$ и $\mathscr{E}_2$ включены последовательно.
+\begin{equation}
+	W_1=\frac{CU^2}{2}=\frac{C(\mathscr{E}_2-\mathscr{E}_1)^2}{2}
+\end{equation}
+\begin{equation}
+	q_1=q_2=q=C\mathscr{E}
+\end{equation}
+После переключения в положение 2 разность потенциалов на обкладках конденсатора равна $\mathscr{E}_1$
+\begin{equation}
+	W_2=\frac{C\mathscr{E}_1^2}{2}
+\end{equation}
+Тогда
+\begin{equation}
+	W_2-W_1=\frac{C\mathscr{E}_1^2}{2}-\frac{C(\mathscr{E}_2-\mathscr{E}_1)^2}{2}=
+	С\mathscr{E}_2\mathscr{E}_1-\frac{C\mathscr{E}_2^2}{2}
+\end{equation}
+Также нужно учесть работу источника. При переключении ключа через источник протечет заряд $q'$:
+\begin{equation}
+	q'=q_2-q_1=C\mathscr{E}_1-(C\mathscr{E}_1-C\mathscr{E}_2)=
+	C\mathscr{E}_2
+\end{equation}
+\begin{equation}
+	A=\mathscr{E}_1 q'=C\mathscr{E}_2\mathscr{E}_1
+\end{equation}
+Работа пойдет на выделение тепла и изменение энергии системы:
+\begin{equation}
+	A=(W_2-W_1)+Q
+\end{equation}
+Отсюда
+\begin{equation}
+	Q=A-(W_2-W_1)=\frac{C\mathscr{E}_2^2}{2}
+\end{equation}
+
+\end{document}

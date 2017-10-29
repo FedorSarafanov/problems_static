@@ -1,0 +1,88 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodovE{3.13b}
+
+\begin{document}
+
+% \begin{tikzpict}
+% 	\lineann[1]{0}{2}{$2a$}
+% 	\begin{scope}[xshift=1cm]
+% 		\lineannn[-1]{0}{0.3}{$dx$}		
+% 	\end{scope}
+% 	\draw (0,-0.15) rectangle ++(2,0.3);
+% 	\draw[fill=magenta] (1,-0.15) rectangle ++(0.3,0.3);
+% 	% \draw (1.15,-0.1) node[below] {$dq$};
+% 	% \draw (-4,0) circle (0cm);
+% 	\vbLabel{0}{-0.1}{0};
+% 	\draw[axis,->] (0,0) -- ++(4,0) node[right] {$+x$};
+
+% 	\draw[fill=magenta] (3,0) coordinate (Y) circle (2pt);
+% 	\draw[force,->] (Y) -- ++ (0.5,0) node[below] {$d\vec{E}$};
+% \end{tikzpict}
+
+\begin{tikzpict}[scale=1.5]
+	\lineann[1]{0}{1}{$a$}
+	\lineann[2]{0}{1.57}{$x$}
+	\begin{scope}[xshift=1.5cm]
+		\lineannn[-1]{0}{0.15}{$dx$}		
+	\end{scope}
+	\begin{scope}[xshift=1cm]
+		\lineann[1]{0}{2}{$r$}		
+	\end{scope}	
+	\begin{scope}[xshift=1.57cm]
+		\lineann[2]{0}{1.43}{$R$}		
+	\end{scope}		
+	\draw (0,-0.15) rectangle ++(2,0.3);
+	\draw[fill=magenta] (1.5,-0.15) rectangle ++(0.15,0.3);
+	% \draw (1.15,-0.1) node[below] {$dq$};
+	% \draw (-4,0) circle (0cm);
+	\vbLabel{0}{-0.1}{0};
+	\draw[axis,->] (0,0) -- ++(4,0) node[right] {$+x$};
+
+	\draw[fill=magenta] (3,0) coordinate (Y) circle (2pt);
+	\draw[force,->] (Y) -- ++ (0.5,0) node[below] {$d\vec{E}$};
+\end{tikzpict}
+
+Линейная плотность заряда на стержне
+\begin{equation}
+	\lambda=\frac{q}{2a}
+	\quad\Rightarrow\quad
+	dq=\lambda dx
+\end{equation}
+Напряженность элементарного (точечного) заряда $dq$
+\begin{equation}
+	dE=\frac{k\cdot \lambda dx}{R^2}
+\end{equation}
+Причем $R$ - функция (полагаем, что $r>a$):
+\begin{equation}
+	R=R(x)=(2a-x)+(r-a)=a+r-x
+\end{equation}
+где $r$ -- расстояние от середины стержня до точки наблюдения, $R$ -- расстояние от произвольного элемента стержня с координатой $x\in[0,2a]$ до точки наблюдения.
+
+% \begin{equation}
+% 	dr=-dx
+% \end{equation}
+Тогда полная напряженность в точке наблюдения
+\begin{eqnarray}
+	E=
+	\int\limits_0^{2a}
+	k\frac{\lambda dx}{(a+r-x)^2}=
+	k\lambda\int\limits_0^{2a}
+	\frac{-d(a+r-x)}{(a+r-x)^2}=
+	k\lambda\frac{1}{a+r-x}\bigg|_0^{2a}=\\
+	=k\lambda\frac{1}{r-a}-k\lambda\frac{1}{r+a}=
+	k\lambda\frac{(r+a)-(r-a)}{r^2-a^2}=k\lambda\frac{2a}{r^2-a^2}
+\end{eqnarray}
+Так как $2a\lambda=q$, то
+\begin{equation}
+	E=k\frac{q}{r^2-a^2}
+\end{equation}
+При $r \gg a$
+\begin{equation}
+	E=
+	k\frac{q}{r^2}
+\end{equation}
+
+% Т.е. при большом удалении от стержня его поле становится  полем точеч
+\end{document}

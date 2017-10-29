@@ -1,0 +1,127 @@
+\documentclass[a5paper,10pt]{article}
+\def\source{/home/osabio/tex/templates}
+\input{\source/head.tex}
+\irodovE{3.9}
+% Наш паровоз летит, 
+% Колёса гнутые, 
+% А нам всё похую, 
+% Мы ебанутые! 
+\begin{document}
+\begin{tikzpict}
+	\draw (0,-1) -- (0,1);
+	% \draw (-4,0) circle (0cm);
+	\lineann[1]{90}{1}{$R$}
+	\begin{scope}[yshift=1cm]
+		\lineann[1.5]{-19}{3.16}{$r$}		
+	\end{scope}	
+	\draw[axis,->] (0,0) -- ++(0,1.5) node[above] {$+y$};
+	\draw[axis,->] (0,0) -- ++(4,0) node[right] {$+z$};
+
+	\draw[] (0,0) -- ++ (90:1) coordinate (X);
+
+	\draw[fill=magenta] (X) circle (2pt) node [right, xshift=0.5em, yshift=0.5em] %
+		{$dq(\phi)=dl\cdot \lambda$};
+	\draw[fill=magenta] (3,0) coordinate (Y) circle (2pt);% node [left]		{$P$};
+	\draw[axis] (X) -- (Y);
+	\draw[force,->] (Y) -- ++ (1.5/2,-0.5/2) node[below] {$d\vec{E}$};
+\end{tikzpict}
+\begin{equation}
+	\oiint\limits_{(S)} \overrightarrow{E} d\overrightarrow{S} = 4 \pi 
+\end{equation}
+Линейная плотность заряда на кольце
+\begin{equation}
+	\lambda=\frac{q}{2\pi R}
+\end{equation}
+% Рассмотрим напряженность в центре кольца.
+	% dE_y=\frac{k\cdot dq(\phi)}{r^2}\sin\phi
+% \begin{equation}
+% 	d\vec{E}=
+% 		dE_x\cdot \vec{i}+
+% 		dE_y\cdot \vec{j}\\	
+% \end{equation}
+Напряженность элементарного (точечного) заряда $dq$
+\begin{equation}
+	dE=\frac{k\cdot \lambda dl}{r^2}
+\end{equation}
+С другой стороны, если перейти в полярную систему координат, то
+\begin{equation}
+	dl=Rd\phi
+\end{equation}
+И тогда
+\begin{equation}
+	dE=\frac{k\cdot \lambda Rd\phi}{r^2}=\frac{k\lambda R}{r^2} d\phi
+\end{equation}
+Запишем дифференциал напряженности в проекциях:
+\begin{gather}
+	dE_x=\frac{k\lambda R}{r^2} \cos\phi\sin\Theta\ d\phi, \quad
+	E_x=\frac{k\lambda R}{r^2}\sin\Theta\int\limits_0^{2\pi}\cos\phi\ d\phi=0\\
+	dE_y=\frac{k\lambda R}{r^2} \sin\phi\sin\Theta\ d\phi
+	, \quad
+	E_y=\frac{k\lambda R}{r^2}\sin\Theta\int\limits_0^{2\pi}\sin\phi\ d\phi=0\\
+	dE_z=\frac{k\lambda R}{r^2} \cos\Theta\ d\phi
+	, \quad
+	E_z=\frac{k\lambda R}{r^2}\cos\Theta\int\limits_0^{2\pi}d\phi=\frac{k 2\pi\lambda Rx}{r^3}=\frac{kqx}{r^3}
+\end{gather}
+Где
+\begin{equation}
+	\sin\Theta=\frac{R}{r}=\frac{R}{\sqrt{R^2+z^2}}\quad, \quad
+	\cos\Theta=\frac{z}{r}=\frac{z}{\sqrt{R^2+z^2}}
+\end{equation}
+
+Тогда полная напряженность в точке наблюдения
+\begin{equation}
+	E=E_z=
+	k\frac{qz}{r^3}=k\frac{qz}{(R^2+z^2)^{3/2}}
+\end{equation}
+При $z \gg R$
+\begin{equation}
+	E=
+	k\frac{q}{z^2}
+\end{equation}
+Найдем на оси $z$ точку максимума напряженности.
+\begin{equation}
+	\frac{dE}{dz}=\frac{kq(R^2-2z^2)}{\ldots}=0
+\end{equation}
+На расстоянии $z'$ (решение уравнения выше) $E$ будет максимальным:
+\begin{equation}
+	z'=\frac{R}{\sqrt{2}}
+\end{equation}
+\begin{equation}
+	E_{max}=E(z')=k\frac{qR}{\sqrt{2}(R^2+R^2/2)^{3/2}}=
+	\frac{2kq}{3\sqrt{3}R^2}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			enlargelimits=false,
+			ymax = 0.5,
+			xtick=\empty,
+			ytick=\empty,
+ 			axis x line*=bottom,
+  			axis y line*=left, 	
+  			xlabel=$z$,
+  			ylabel=$E$,
+  			axis y line=middle,
+			axis x line=middle,
+			every axis x label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=west,
+			},
+			every axis y label/.style={
+			    at={(ticklabel* cs:1.05)},
+			    anchor=south,
+			},  			
+		]
+			\addplot[domain=0:2, samples=100]{x/(1+x^2)^(3/2)};
+
+		\end{axis}
+			\draw[dashed] (-0.1,0.385*11.4) node [left] {$E_{max}$} -- ++(5,0);
+			\draw[dashed] (2.4,-0.1) node [below] {$z'$} -- ++(0,5);
+	\end{tikzpicture}
+	\caption{График функции $E(z)$}
+	\label{fig:figure1}
+\end{figure}
+
+\end{document}
